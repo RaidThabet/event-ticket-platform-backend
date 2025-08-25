@@ -3,6 +3,7 @@ spring:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/event-ticket-platform}
     username: ${JDBC_DATABASE_USERNAME:postgres}
     password: ${JDBC_DATABASE_PASSWORD:password}
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -10,3 +11,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     database: postgresql
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/auth/realms/event-ticket-platform
