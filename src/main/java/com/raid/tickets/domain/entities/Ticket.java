@@ -1,5 +1,6 @@
 package com.raid.tickets.domain.entities;
 
+import com.raid.tickets.domain.TicketStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,17 +10,15 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ticket_types")
+@Table(name = "tickets")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TicketType {
+public class Ticket {
 
     @Id
     @Column(nullable = false, updatable = false)
@@ -27,20 +26,20 @@ public class TicketType {
     private UUID id;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = true)
-    private Integer totalAvailable;
-
-    @Column(nullable = false)
-    private Double price;
+    @Enumerated(EnumType.STRING)
+    private TicketStatusEnum status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @JoinColumn(name = "user_id")
+    private User purchaser;
 
-    @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL)
-    private List<Ticket> tickets = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_type_id")
+    private TicketType ticketType;
+
+    // TODO: Ticket Validations
+
+    // TODO: Qr Codes
 
     @CreatedDate
     @Column(updatable = false, nullable = false)

@@ -48,6 +48,9 @@ public class User {
     )
     private List<Event> staffingEvents = new ArrayList<>();
 
+    @OneToMany(mappedBy = "purchaser", cascade = CascadeType.ALL)
+    private List<Ticket> tickets = new ArrayList<>();
+
     @CreatedDate
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
