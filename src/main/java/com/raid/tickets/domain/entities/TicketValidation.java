@@ -1,6 +1,7 @@
 package com.raid.tickets.domain.entities;
 
-import com.raid.tickets.domain.TicketStatusEnum;
+import com.raid.tickets.domain.TicketValidationMethod;
+import com.raid.tickets.domain.TicketValidationStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,17 +11,15 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tickets")
+@Table(name = "ticket_validations")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ticket {
+public class TicketValidation {
 
     @Id
     @Column(nullable = false, updatable = false)
@@ -29,20 +28,15 @@ public class Ticket {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TicketStatusEnum status;
+    private TicketValidationStatusEnum status;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TicketValidationMethod validationMethod;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User purchaser;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_type_id")
-    private TicketType ticketType;
-
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private List<TicketValidation> validations = new ArrayList<>();
-
-    // TODO: Qr Codes
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
