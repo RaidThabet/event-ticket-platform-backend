@@ -32,10 +32,10 @@ public class Event {
     private String name;
 
     @Column(nullable = true)
-    private LocalDateTime start;
+    private LocalDateTime startDateTime;
 
     @Column(nullable = true)
-    private LocalDateTime end;
+    private LocalDateTime endDateTime;
 
     @Column(nullable = false)
     private String venue;
