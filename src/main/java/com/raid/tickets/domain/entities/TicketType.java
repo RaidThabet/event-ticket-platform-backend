@@ -1,6 +1,5 @@
 package com.raid.tickets.domain.entities;
 
-import com.raid.tickets.domain.EventStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,17 +9,15 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "events")
+@Table(name = "ticket_types")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class TicketType {
 
     @Id
     @Column(nullable = false, updatable = false)
@@ -31,36 +28,16 @@ public class Event {
     private String name;
 
     @Column(nullable = true)
-    private LocalDateTime start;
-
-    @Column(nullable = true)
-    private LocalDateTime end;
+    private Integer totalAvailable;
 
     @Column(nullable = false)
-    private String venue;
-
-    @Column(nullable = true)
-    private LocalDateTime salesStart;
-
-    @Column(nullable = true)
-    private LocalDateTime salesEnd;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private EventStatusEnum status;
+    private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organizer_id")
-    private User organizer;
+    @JoinColumn(name = "event_id")
+    private Event event;
 
-    @ManyToMany(mappedBy = "attendingEvents")
-    private List<User> attendees = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "staffingEvents")
-    private List<User> staff = new ArrayList<>();
-
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<TicketType> ticketTypes = new ArrayList<>();
+    // TODO: Tickets
 
     @CreatedDate
     @Column(updatable = false, nullable = false)
