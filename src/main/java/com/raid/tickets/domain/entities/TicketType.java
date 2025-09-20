@@ -36,6 +36,9 @@ public class TicketType {
     @Column(nullable = false)
     private Double price;
 
+    @Column(nullable = true)
+    private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     private Event event;
