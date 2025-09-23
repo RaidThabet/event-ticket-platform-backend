@@ -11,6 +11,8 @@ import com.raid.tickets.repositories.UserRepository;
 import com.raid.tickets.services.EventService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +58,10 @@ public class EventServiceImpl implements EventService {
         eventToCreate.setTicketTypes(ticketTypesToCreate);
 
         return eventRepository.save(eventToCreate);
+    }
+
+    @Override
+    public Page<Event> listEventsForOrganizer(UUID organizeId, Pageable pageable) {
+        return eventRepository.findByOrganizerId(organizeId, pageable);
     }
 }
