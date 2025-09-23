@@ -1,9 +1,8 @@
 package com.raid.tickets.mappers;
 
-import com.raid.tickets.domain.dtos.CreateEventRequestDto;
-import com.raid.tickets.domain.dtos.CreateEventResponseDto;
-import com.raid.tickets.domain.dtos.CreateTicketTypeRequestDto;
+import com.raid.tickets.domain.dtos.*;
 import com.raid.tickets.domain.entities.Event;
+import com.raid.tickets.domain.entities.TicketType;
 import com.raid.tickets.domain.request.CreateEventRequest;
 import com.raid.tickets.domain.request.CreateTicketTypeRequest;
 import org.mapstruct.Mapper;
@@ -17,4 +16,8 @@ public interface EventMapper {
     CreateEventRequest fromDto(CreateEventRequestDto dto);
 
     CreateEventResponseDto toDto(Event event);
+
+    ListEventTicketTypeResponseDto toDto(TicketType ticketType);
+
+    ListEventResponseDto toListEventResponseDto(Event event);
 }
