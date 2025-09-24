@@ -8,6 +8,7 @@ public enum ErrorCode {
 
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found with id/email %s", HttpStatus.NOT_FOUND),
     EVENT_NOT_FOUND("EVENT_NOT_FOUND", "Event with id %s does not exist", HttpStatus.BAD_REQUEST),
+    EVENT_ID_UPDATE("EVENT_UPDATE_FAILED", "Cannot update the id of the event", HttpStatus.BAD_REQUEST),
     TICKET_TYPE_NOT_FOUND("TICKET_TYPE_NOT_FOUND", "Ticket type with id %s does not exist", HttpStatus.BAD_REQUEST),
     VALIDATION_FAILED("VALIDATION_FAILED", "Validation failed", HttpStatus.BAD_REQUEST),
     CONSTRAINT_VIOLATION("CONSTRAINT_VIOLATION", "Constraint violation occurred", HttpStatus.BAD_REQUEST),
