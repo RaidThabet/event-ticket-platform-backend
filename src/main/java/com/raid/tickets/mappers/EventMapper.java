@@ -5,6 +5,8 @@ import com.raid.tickets.domain.entities.Event;
 import com.raid.tickets.domain.entities.TicketType;
 import com.raid.tickets.domain.request.CreateEventRequest;
 import com.raid.tickets.domain.request.CreateTicketTypeRequest;
+import com.raid.tickets.domain.request.UpdateEventRequest;
+import com.raid.tickets.domain.request.UpdateTicketTypeRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -24,4 +26,12 @@ public interface EventMapper {
     GetEventDetailsTicketTypesResponseDto toGetEventDetailsTicketTypesResponseDto(TicketType ticketType);
 
     GetEventDetailsResponseDto toGetEventDetailsResponseDto(Event event);
+
+    UpdateTicketTypeRequest fromDto(UpdateTicketTypeRequestDto dto);
+
+    UpdateEventRequest fromDto(UpdateEventResponseDto dto);
+
+    UpdateTicketTypeResponseDto toUpdateTicketTypeResponseDto(TicketType ticketType);
+
+    UpdateEventResponseDto toUpdateEventResponseDto(Event event);
 }
