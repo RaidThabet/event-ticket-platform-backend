@@ -2,6 +2,7 @@ package com.raid.tickets.controllers;
 
 import com.raid.tickets.domain.dtos.CreateEventRequestDto;
 import com.raid.tickets.domain.dtos.CreateEventResponseDto;
+import com.raid.tickets.domain.dtos.GetEventDetailsResponseDto;
 import com.raid.tickets.domain.dtos.ListEventResponseDto;
 import com.raid.tickets.domain.entities.Event;
 import com.raid.tickets.domain.request.CreateEventRequest;
@@ -50,5 +51,17 @@ public class EventController {
         UUID organizerId = UUID.fromString(jwt.getSubject());
         Page<Event> events = eventService.listEventsForOrganizer(organizerId, pageable);
         return ResponseEntity.ok(events.map(eventMapper::toListEventResponseDto));
+    }
+
+    @GetMapping("{eventId}")
+    public ResponseEntity<GetEventDetailsResponseDto> getEventDetails(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable(name = "eventId") UUID id
+    ) {
+        UUID organizerId = UUID.fromString(jwt.getSubject());
+        return eventService.getEventForOrganizer(organizerId, id)
+                .map(eventMapper::toGetEventDetailsResponseDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
