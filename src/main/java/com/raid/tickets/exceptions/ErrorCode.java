@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found with id/email %s", HttpStatus.NOT_FOUND),
+    EVENT_NOT_FOUND("EVENT_NOT_FOUND", "Event with id %s does not exist", HttpStatus.BAD_REQUEST),
+    TICKET_TYPE_NOT_FOUND("TICKET_TYPE_NOT_FOUND", "Ticket type with id %s does not exist", HttpStatus.BAD_REQUEST),
     VALIDATION_FAILED("VALIDATION_FAILED", "Validation failed", HttpStatus.BAD_REQUEST),
     CONSTRAINT_VIOLATION("CONSTRAINT_VIOLATION", "Constraint violation occurred", HttpStatus.BAD_REQUEST),
     USERNAME_NOT_FOUND("USERNAME_NOT_FOUND", "Username not found", HttpStatus.NOT_FOUND),
