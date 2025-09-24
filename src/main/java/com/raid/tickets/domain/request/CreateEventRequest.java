@@ -28,5 +28,6 @@ public class CreateEventRequest {
 
     private EventStatusEnum status;
 
+    @Builder.Default
     private List<CreateTicketTypeRequest> ticketTypes = new ArrayList<>();
 }
