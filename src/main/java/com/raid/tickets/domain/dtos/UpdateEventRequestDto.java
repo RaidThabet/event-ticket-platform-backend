@@ -21,7 +21,6 @@ import java.util.UUID;
 public class UpdateEventRequestDto {
 
     @NotNull(message = "Event id must be provided")
-    @org.hibernate.validator.constraints.UUID(message = "Id format is invalid")
     private UUID id;
 
     @NotBlank(message = "Event name is required")

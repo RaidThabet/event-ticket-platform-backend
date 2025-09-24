@@ -29,7 +29,7 @@ public interface EventMapper {
 
     UpdateTicketTypeRequest fromDto(UpdateTicketTypeRequestDto dto);
 
-    UpdateEventRequest fromDto(UpdateEventResponseDto dto);
+    UpdateEventRequest fromDto(UpdateEventRequestDto dto);
 
     UpdateTicketTypeResponseDto toUpdateTicketTypeResponseDto(TicketType ticketType);
 

@@ -1,11 +1,9 @@
 package com.raid.tickets.controllers;
 
-import com.raid.tickets.domain.dtos.CreateEventRequestDto;
-import com.raid.tickets.domain.dtos.CreateEventResponseDto;
-import com.raid.tickets.domain.dtos.GetEventDetailsResponseDto;
-import com.raid.tickets.domain.dtos.ListEventResponseDto;
+import com.raid.tickets.domain.dtos.*;
 import com.raid.tickets.domain.entities.Event;
 import com.raid.tickets.domain.request.CreateEventRequest;
+import com.raid.tickets.domain.request.UpdateEventRequest;
 import com.raid.tickets.mappers.EventMapper;
 import com.raid.tickets.services.EventService;
 import jakarta.validation.Valid;
@@ -63,5 +61,20 @@ public class EventController {
                 .map(eventMapper::toGetEventDetailsResponseDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<UpdateEventResponseDto> createEvent(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable("id") UUID eventId,
+            @Valid @RequestBody UpdateEventRequestDto request
+    ) {
+        UUID organizerId = UUID.fromString(jwt.getSubject());
+        UpdateEventRequest createEventRequest = eventMapper.fromDto(request);
+        Event updatedEvent = eventService.updateEventForOrganizer(organizerId, eventId, createEventRequest);
+
+        UpdateEventResponseDto responseDto = eventMapper.toUpdateEventResponseDto(updatedEvent);
+
+        return ResponseEntity.ok(responseDto);
     }
 }

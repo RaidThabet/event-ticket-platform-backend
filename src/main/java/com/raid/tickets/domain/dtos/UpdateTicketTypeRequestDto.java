@@ -16,7 +16,6 @@ import java.util.UUID;
 @Builder
 public class UpdateTicketTypeRequestDto {
 
-    @org.hibernate.validator.constraints.UUID(message = "Id format is invalid")
     private UUID id;
 
     @NotBlank(message = "Ticket type name is required")
