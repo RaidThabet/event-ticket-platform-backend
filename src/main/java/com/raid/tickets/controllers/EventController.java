@@ -27,7 +27,7 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping
-    public ResponseEntity<CreateEventResponseDto> createEvent(
+    public ResponseEntity<CreateEventResponseDto> updateEvent(
             @AuthenticationPrincipal Jwt jwt,
             @Valid @RequestBody CreateEventRequestDto request
     ) {
@@ -64,7 +64,7 @@ public class EventController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<UpdateEventResponseDto> createEvent(
+    public ResponseEntity<UpdateEventResponseDto> updateEvent(
             @AuthenticationPrincipal Jwt jwt,
             @PathVariable("id") UUID eventId,
             @Valid @RequestBody UpdateEventRequestDto request
