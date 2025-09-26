@@ -1,5 +1,6 @@
 package com.raid.tickets.services.impl;
 
+import com.raid.tickets.domain.EventStatusEnum;
 import com.raid.tickets.domain.entities.Event;
 import com.raid.tickets.domain.entities.TicketType;
 import com.raid.tickets.domain.entities.User;
@@ -136,5 +137,10 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void deleteEventForOrganizer(UUID organizeId, UUID id) {
         getEventForOrganizer(organizeId, id).ifPresent(eventRepository::delete);
+    }
+
+    @Override
+    public Page<Event> listPublishedEvents(Pageable pageable) {
+        return eventRepository.findByStatus(EventStatusEnum.PUBLISHED, pageable);
     }
 }
